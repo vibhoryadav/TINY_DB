@@ -5,11 +5,11 @@
 | Metric | Value |
 |---|---|
 | Total Engineering Budget | 220.0 hours |
-| Completed Hours | 0.0 hours |
-| Remaining Hours | 220.0 hours |
+| Completed Hours | 0.75 hours |
+| Remaining Hours | 219.25 hours |
 | Current Phase | Phase 00 — Prerequisites and Architecture |
-| Current Session | Initialization Complete (Next: `DAY-001`) |
-| Completed Sessions | 0 / 284 |
+| Current Session | `DAY-001` Completed (Next: `DAY-002`) |
+| Completed Sessions | 1 / 284 |
 | Incomplete Sessions | 0 |
 | Blocked Sessions | 0 |
 
@@ -17,16 +17,17 @@
 
 ## Component Status
 
-### Completed Components (Bootstrap Only)
+### Completed Components
 - Git repository initialized with `main` and `develop` branches tracking `origin` (`https://github.com/vibhoryadav/TINY_DB.git`)
 - Full repository directory layout (`src/`, `include/tinydb/`, `tests/`, `benchmarks/`, `examples/`, `docs/`)
-- Root `CMakeLists.txt` configured for C++20, strict warnings, optional ASan/UBSan, and GoogleTest
+- Root `CMakeLists.txt` configured for C++20, strict warnings (`-Werror`), non-recoverable ASan/UBSan (`-fno-sanitize-recover=all`), `format-check` target, and GoogleTest
 - Minimal `tinydb` executable (`src/cli/main.cpp`) and `SmokeTest` (`tests/unit/smoke_test.cpp`)
-- Architectural blueprint documentation (`docs/*.md`) and complete 284-session roadmap (`docs/roadmap/`)
+- Architectural blueprint documentation (`docs/*.md`), developer tooling guide (`docs/tooling.md`), and complete 284-session roadmap (`docs/roadmap/`)
 - GitHub Actions CI workflow (`.github/workflows/ci.yml`)
+- `DAY-001`: Verified Debug, Release, ASan+UBSan builds/tests, `clang-format`, and LLDB symbolicated debugging
 
 ### Pending Components
-- Phase 00: C++20 core utilities (`Status`, `Result<T>`, endianness, CRC32, `FileHandle`, architecture labs)
+- Phase 00 (`DAY-002`–`DAY-018`): C++20 core utilities (`slice_utils`, `ScopeGuard`, `ByteBuffer`, `Status`, `Result<T>`, `types.hpp`, `endian`, `crc32`, `FileHandle`, `AlignedPageBuffer`, `latch`, `identifier`, architecture labs)
 - Phase 01: `DiskManager`, file header, 4096-byte `Page` layout, free-page management
 - Phase 02: Types, `Schema`, `Tuple`, `SlottedPage`, `TableHeap`
 - Phase 03: `CatalogManager` and atomic catalog persistence
@@ -42,9 +43,10 @@
 
 ## Build & Verification Status
 
-- **Build Status:** Verified cleanly during bootstrap initialization (CMake + Apple Clang C++20).
-- **Testing Status:** `SmokeTest.ProjectConstantsMatchSpecification` passing via `ctest`.
-- **Sanitizers:** Verified ASan/UBSan CMake configuration cleanly during bootstrap initialization.
+- **Build Status:** Debug, ASan+UBSan, and Release configurations build cleanly with `-DTINYDB_WARNINGS_AS_ERRORS=ON`.
+- **Testing Status:** `SmokeTest.ProjectConstantsMatchSpecification` (`1/1`) passes in Debug, ASan+UBSan, and Release via `ctest`.
+- **Formatting:** `format-check` (`clang-format --dry-run --Werror`) passes with zero violations.
+- **Debugger & Sanitizers:** LLDB breakpoint + backtrace verified on `GetVersionBanner`; ASan/UBSan verified catching stack out-of-bounds access in scratch check.
 
 ---
 
@@ -56,10 +58,11 @@ See [`docs/design-decisions.md`](../design-decisions.md) (`DD-001` through `DD-0
 
 ## Known Bugs
 
-- None recorded (bootstrap state).
+- None recorded.
 
 ---
 
 ## Last Verified Commit
 
-- Recorded at initial bootstrap completion (`DAY-001` will update this with the exact verified bootstrap SHA and every session commit thereafter).
+- Bootstrap initialization (`main` & `develop` baseline): `01eafde0d39fb475e7f0aba760a5da7d3c8c5c52` (`init: initialize TinyDB C++20 repository, architecture docs, and 220-hour roadmap`)
+- `DAY-001` commit recorded upon push to `origin/develop` (updated in `DAY-002`).

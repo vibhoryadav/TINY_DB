@@ -7,7 +7,7 @@ Status Legend: `Pending` | `In Progress` | `Completed` | `Incomplete` | `Blocked
 
 | Phase | Area | Sessions | Hours | Completed |
 |---|---|---:|---:|---:|
-| 00 | Prerequisites and Architecture | 18 | 14.0 | 0 / 18 |
+| 00 | Prerequisites and Architecture | 18 | 14.0 | 1 / 18 |
 | 01 | Disk Manager and Page Format | 31 | 24.0 | 0 / 31 |
 | 02 | Records and Table Heap | 26 | 20.0 | 0 / 26 |
 | 03 | Catalog Management | 10 | 8.0 | 0 / 10 |
@@ -18,13 +18,13 @@ Status Legend: `Pending` | `In Progress` | `Completed` | `Incomplete` | `Blocked
 | 08 | Transactions and WAL | 36 | 28.0 | 0 / 36 |
 | 09 | Security and Testing | 31 | 24.0 | 0 / 31 |
 | 10 | Documentation and Release | 13 | 10.0 | 0 / 13 |
-| **Total** | | **284** | **220.0** | **0 / 284** |
+| **Total** | | **284** | **220.0** | **1 / 284** |
 
 ## Complete Session Schedule
 
 | Session | Phase | Title | Duration | Prerequisites | Prompt File | Status |
 |---|---|---|---:|---|---|---|
-| `DAY-001` | Phase 00 | Verify Toolchain, C++20 Compiler Warnings, Sanitizers, LLDB & `clang-format` Workflow | 45m | Repository bootstrap complete (`CMakeLists.txt`, minimal `tinydb` binary, GoogleTest smoke test). | [`PHASE-00.md`](daily-prompts/PHASE-00.md) | Pending |
+| `DAY-001` | Phase 00 | Verify Toolchain, C++20 Compiler Warnings, Sanitizers, LLDB & `clang-format` Workflow | 45m | Repository bootstrap complete (`CMakeLists.txt`, minimal `tinydb` binary, GoogleTest smoke test). | [`PHASE-00.md`](daily-prompts/PHASE-00.md) | Completed |
 | `DAY-002` | Phase 00 | C++20 Memory Model: Stack vs Heap, Pointers, References, and `std::span` in Core Utilities | 45m | DAY-001 complete. | [`PHASE-00.md`](daily-prompts/PHASE-00.md) | Pending |
 | `DAY-003` | Phase 00 | RAII & Ownership Semantics: Rule of Five, `std::unique_ptr`, and `std::shared_ptr` | 45m | DAY-002 complete. | [`PHASE-00.md`](daily-prompts/PHASE-00.md) | Pending |
 | `DAY-004` | Phase 00 | Move Semantics & Value Categories: Implementing a Zero-Copy `ByteBuffer` Wrapper | 45m | DAY-003 complete. | [`PHASE-00.md`](daily-prompts/PHASE-00.md) | Pending |
