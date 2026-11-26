@@ -5,11 +5,11 @@
 | Metric | Value |
 |---|---|
 | Total Engineering Budget | 220.0 hours |
-| Completed Hours | 0.75 hours |
-| Remaining Hours | 219.25 hours |
+| Completed Hours | 1.5 hours |
+| Remaining Hours | 218.5 hours |
 | Current Phase | Phase 00 — Prerequisites and Architecture |
-| Current Session | `DAY-001` Completed (Next: `DAY-002`) |
-| Completed Sessions | 1 / 284 |
+| Current Session | `DAY-002` Completed (Next: `DAY-003`) |
+| Completed Sessions | 2 / 284 |
 | Incomplete Sessions | 0 |
 | Blocked Sessions | 0 |
 
@@ -25,9 +25,10 @@
 - Architectural blueprint documentation (`docs/*.md`), developer tooling guide (`docs/tooling.md`), and complete 284-session roadmap (`docs/roadmap/`)
 - GitHub Actions CI workflow (`.github/workflows/ci.yml`)
 - `DAY-001`: Verified Debug, Release, ASan+UBSan builds/tests, `clang-format`, and LLDB symbolicated debugging
+- `DAY-002`: Bounds-checked non-owning `std::span` byte-slice utilities (`slice_utils`) with GoogleTest coverage
 
 ### Pending Components
-- Phase 00 (`DAY-002`–`DAY-018`): C++20 core utilities (`slice_utils`, `ScopeGuard`, `ByteBuffer`, `Status`, `Result<T>`, `types.hpp`, `endian`, `crc32`, `FileHandle`, `AlignedPageBuffer`, `latch`, `identifier`, architecture labs)
+- Phase 00 (`DAY-003`–`DAY-018`): C++20 core utilities (`ScopeGuard`, `ByteBuffer`, `Status`, `Result<T>`, `types.hpp`, `endian`, `crc32`, `FileHandle`, `AlignedPageBuffer`, `latch`, `identifier`, architecture labs)
 - Phase 01: `DiskManager`, file header, 4096-byte `Page` layout, free-page management
 - Phase 02: Types, `Schema`, `Tuple`, `SlottedPage`, `TableHeap`
 - Phase 03: `CatalogManager` and atomic catalog persistence
@@ -65,4 +66,5 @@ See [`docs/design-decisions.md`](../design-decisions.md) (`DD-001` through `DD-0
 ## Last Verified Commit
 
 - Bootstrap initialization (`main` & `develop` baseline): `01eafde0d39fb475e7f0aba760a5da7d3c8c5c52` (`init: initialize TinyDB C++20 repository, architecture docs, and 220-hour roadmap`)
-- `DAY-001` commit recorded upon push to `origin/develop` (updated in `DAY-002`).
+- `DAY-001`: `6f6afeb9e2a04ae86f30d1e2d7e2b75ceaeb783b` (`day-001: verify C++20 toolchain, sanitizers, lldb, and formatting workflow`)
+- `DAY-002` commit recorded upon push to `origin/develop` (updated in `DAY-003`).
