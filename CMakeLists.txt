@@ -49,6 +49,7 @@ endif()
 
 add_library(tinydb_core STATIC
   src/core/build_info.cpp
+  src/core/slice_utils.cpp
 )
 
 target_include_directories(
@@ -80,6 +81,7 @@ if(TINYDB_BUILD_TESTS)
 
   add_executable(tinydb_unit_tests
     tests/unit/smoke_test.cpp
+    tests/unit/core/slice_utils_test.cpp
   )
   target_link_libraries(tinydb_unit_tests PRIVATE tinydb_core GTest::gtest_main)
   gtest_discover_tests(tinydb_unit_tests)
