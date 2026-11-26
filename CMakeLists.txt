@@ -38,6 +38,7 @@ else()
     target_compile_options(
       tinydb_compile_options
       INTERFACE -fsanitize=address,undefined
+                -fno-sanitize-recover=all
                 -fno-omit-frame-pointer
                 -g)
     target_link_options(
@@ -82,4 +83,25 @@ if(TINYDB_BUILD_TESTS)
   )
   target_link_libraries(tinydb_unit_tests PRIVATE tinydb_core GTest::gtest_main)
   gtest_discover_tests(tinydb_unit_tests)
+endif()
+
+find_program(
+  TINYDB_CLANG_FORMAT
+  NAMES clang-format
+  HINTS /Library/Developer/CommandLineTools/usr/bin /opt/homebrew/bin)
+
+if(TINYDB_CLANG_FORMAT)
+  file(
+    GLOB_RECURSE
+    TINYDB_FORMAT_SOURCES
+    CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
+  add_custom_target(
+    format-check
+    COMMAND ${TINYDB_CLANG_FORMAT} --dry-run --Werror ${TINYDB_FORMAT_SOURCES}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Checking C++20 formatting with clang-format")
 endif()
