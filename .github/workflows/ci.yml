@@ -1,0 +1,42 @@
+name: TinyDB CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            build_type: Debug
+            sanitizers: "ON"
+          - os: ubuntu-latest
+            build_type: Release
+            sanitizers: "OFF"
+          - os: macos-latest
+            build_type: Debug
+            sanitizers: "ON"
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DTINYDB_ENABLE_SANITIZERS=${{ matrix.sanitizers }} \
+            -DTINYDB_WARNINGS_AS_ERRORS=ON
+
+      - name: Build
+        run: cmake --build build -j
+
+      - name: Run Tests
+        run: ctest --test-dir build --output-on-failure
